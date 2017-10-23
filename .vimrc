@@ -1,12 +1,14 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+"Leader キーをspaceに
+let mapleader = "\<Space>"
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
-
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
@@ -39,6 +41,7 @@ nnoremap <silent><C-e> :NERDTreeFocusToggle<CR>
 let g:nerdtree_tabs_open_on_console_startup=1
 " 他のバッファをすべて閉じた時にNERDTreeが開いていたらNERDTreeも一緒に閉じる。
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
 " インターフェイス変更
 Plugin 'vim-airline/vim-airline'
 " Powerline系フォントを利用する
@@ -151,9 +154,9 @@ let g:clang_cpp_options = '-std=c++11 -stdlib=libc++'
 " over-vim 置換時の見やすさ改善
 Plugin 'osyo-manga/vim-over'
 " 全体置換
-nnoremap <silent><Space>o :OverCommandLine<CR>%s//g<Left><Left>
+nnoremap <silent><Space>s :OverCommandLine<CR>%s//g<Left><Left>
 " 選択範囲置換
-vnoremap <silent><Space>o :OverCommandLine<CR>s//g<Left><Left>
+vnoremap <silent><Space>s :OverCommandLine<CR>s//g<Left><Left>
 " カーソルしたの単語置換
 nnoremap sub :OverCommandLine<CR>%s/<C-r><C-w>//g<Left><Left>
 
@@ -317,8 +320,8 @@ nnoremap <silent> [toggle]s :setl spell!<CR>:setl spell?<CR>
 nnoremap <silent> [toggle]l :setl list!<CR>:setl list?<CR>
 nnoremap <silent> [toggle]t :setl expandtab!<CR>:setl expandtab?<CR>
 nnoremap <silent> [toggle]w :setl wrap!<CR>:setl wrap?<CR>
-"Leader キーをspaceに
-let mapleader = "\<Space>"
+" "Leader キーをspaceに
+" let mapleader = "\<Space>"
 "Space+oでnew file
 nnoremap <Leader>o :e<CR>
 "ファイル保存
@@ -355,7 +358,7 @@ function! s:ChangeCurrentDir(directory, bang)
         pwd
     endif
 endfunction
-
+" pasteするときにインデントするのを防ぐ
 if &term =~ "xterm"
     let &t_SI .= "\e[?2004h"
     let &t_EI .= "\e[?2004l"
@@ -394,7 +397,7 @@ autocmd BufWrite *.{c} :CPPCodeCleanup
 autocmd BufWrite *.{h} :CPPCodeCleanup
 
 " vim内のタブ操作
-map <Space> :bp<CR>
+" map <Space> :bp<CR>
 map <S-Space> :bn<CR>
 
 "filetype plugin indent on
