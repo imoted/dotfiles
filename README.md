@@ -1,7 +1,7 @@
 # .vimrc for ROS
 vim setting file for ROS(Robot OS)  
 
-## Instllation
+## Installation
 `$ cd`  
 `$ git clone --recursive https://github.com/h-wata/dotfiles.git`  
 `$ sh dotfilesLink.sh`  
