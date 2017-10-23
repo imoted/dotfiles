@@ -74,6 +74,8 @@ vmap <Leader>b <Plug>(openbrowser-smart-search)
 
 " みんな使っているカラースキーマ
 Plugin 'tomasr/molokai'
+Plugin 'sjl/badwolf'
+Plugin 'w0ng/vim-hybrid'
 " comment out on/off by \c
 Plugin 'tyru/caw.vim'
 " caw comment out
@@ -203,6 +205,10 @@ filetype plugin indent on    " required
    augroup END
 
 syntax enable
+" カラースキーム設定、お好きにどうぞ
+set background=dark
+colorscheme hybrid
+set t_Co=256
 "vi互換 オフ
 set nocompatible
 
