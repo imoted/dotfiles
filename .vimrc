@@ -79,8 +79,8 @@ Plugin 'w0ng/vim-hybrid'
 " comment out on/off by \c
 Plugin 'tyru/caw.vim'
 " caw comment out
-nmap <Leader>c <Plug>(caw:i:toggle)
-vmap <Leader>c <Plug>(caw:i:toggle)
+nmap <Leader>c <Plug>(caw:hatpos:toggle)
+vmap <Leader>c <Plug>(caw:hatpos:toggle)
 
 " ---- For C++ ----
 " 関数前で:Doxとうつと自動でコメント挿入
@@ -168,7 +168,12 @@ Plugin 'taketwo/vim-ros'
 "   - :A 現在編集してるC++のコードに対応するソースコードorヘッダファイル を自動検索
 "   - :roscd
 "   - :rosed
-"
+
+" For Markdown
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'kannokanno/previm'
+au BufRead,BufNewFile *.md set filetype=markdown
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " Git plugin not hosted on GitHub
@@ -209,6 +214,19 @@ syntax enable
 set background=dark
 colorscheme hybrid
 set t_Co=256
+
+" vimrc.localがあればそれも読み込む
+augroup vimrc-local
+  autocmd!
+  autocmd BufNewFile,BufReadPost * call s:vimrc_local(expand('<afile>:p:h'))
+augroup END
+
+function! s:vimrc_local(loc)
+  let files = findfile('.vimrc.local', escape(a:loc, ' ') . ';', -1)
+  for i in reverse(filter(files, 'filereadable(v:val)'))
+    source `=i`
+  endfor
+endfunction
 "vi互換 オフ
 set nocompatible
 
