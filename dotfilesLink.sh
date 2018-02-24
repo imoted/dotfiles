@@ -5,5 +5,6 @@ sudo apt-get clang-format-3.6
 sudo apt-get install clang-format-3.6
 
 ln -sf ~/dotfiles/.vimrc ~/.vimrc
+ln -sf ~/dotfiles/.screenrc ~/.screenrc
 ln -sf ~/dotfiles/ftdetect ~/.vim
 ln -sf ~/dotfiles/bundle ~/.vim
