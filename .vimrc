@@ -164,6 +164,9 @@ nnoremap sub :OverCommandLine<CR>%s/<C-r><C-w>//g<Left><Left>
 
 " Plugin for ROS 
 Plugin 'taketwo/vim-ros'
+let g:ros_make = 'current'
+let g:ros_build_system = 'catkin-tools'
+let g:ros_catkin_make_options = ''
 " command list
 "   - :A 現在編集してるC++のコードに対応するソースコードorヘッダファイル を自動検索
 "   - :roscd
