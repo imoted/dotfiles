@@ -26,7 +26,7 @@ Plugin 'nvie/vim-flake8'
 Plugin 'davidhalter/jedi-vim'
 " pythonのrename用のマッピングがquickrunとかぶるため回避させる
 let g:jedi#rename_command = ""
-let g:jedi#documentation_command= "k"
+let g:jedi#documentation_command= "z"
 autocmd FileType python setlocal completeopt-=preview " ポップアップを表示しない
 
 " Tree構造を表示するC-e で表示 :help NERDtree参照
