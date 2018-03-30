@@ -302,6 +302,7 @@ set listchars=tab:>-,nbsp:%,eol:~,trail:-
 "マクロ及びキー設定
  " 入力モード中に素早くjjと入力した場合はESCとみなす
 inoremap jj <Esc>
+inoremap っｊ <Esc>
 
 " ESCを二回押すことでハイライトを消す
 nmap <silent> <Esc><Esc> :nohlsearch<CR>
@@ -428,3 +429,18 @@ autocmd BufWrite *.{h} :CPPCodeCleanup
 map <S-Space> :bn<CR>
 
 "filetype plugin indent on
+"
+" 入力モードでのカーソル移動
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-h> <Left>
+inoremap <C-l> <Right>
+inoremap っｊ <Esc>
+
+" 日本語入力時にEscを押すと勝手にIMEがOFFになる
+
+function! ImInActivate()
+  call system('fcitx-remote -c')
+endfunction
+inoremap <silent> <C-[> <ESC>:call ImInActivate()<CR>
+inoremap っｊ <ESC>:call ImInActivate()<CR>
