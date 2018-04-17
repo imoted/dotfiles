@@ -38,7 +38,7 @@ Plugin 'airblade/vim-gitgutter'
 let NERDTreeShowHidden = 1
 nnoremap <silent><C-e> :NERDTreeFocusToggle<CR>
 " デフォルトでツリーを表示させる
-let g:nerdtree_tabs_open_on_console_startup=1
+" let g:nerdtree_tabs_open_on_console_startup=1
 " 他のバッファをすべて閉じた時にNERDTreeが開いていたらNERDTreeも一緒に閉じる。
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
@@ -174,7 +174,11 @@ let g:ros_catkin_make_options = ''
 
 " For Markdown
 Plugin 'godlygeek/tabular'
+
 Plugin 'plasticboy/vim-markdown'
+let g:vim_markdown_conceal = 0
+
+" Plugin 'gabrielelana/vim-markdown'
 Plugin 'kannokanno/previm'
 au BufRead,BufNewFile *.md set filetype=markdown
 " plugin from http://vim-scripts.org/vim/scripts.html
@@ -206,7 +210,9 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-
+Plugin 'mattn/webapi-vim'
+Plugin 'tsuyoshiwada/slack-memo-vim', {'depends': 'mattn/webapi-vim'}
+" ~/.vimrc.localにTokenを貼り付けること
 " release autogroup in MyAutoCmd
  augroup MyAutoCmd
    autocmd!
@@ -230,6 +236,9 @@ function! s:vimrc_local(loc)
     source `=i`
   endfor
 endfunction
+if filereadable(expand('~/.vimrc.local'))
+  source ~/.vimrc.local
+endif
 "vi互換 オフ
 set nocompatible
 
