@@ -41,6 +41,14 @@ nnoremap <silent><C-e> :NERDTreeFocusToggle<CR>
 " let g:nerdtree_tabs_open_on_console_startup=1
 " 他のバッファをすべて閉じた時にNERDTreeが開いていたらNERDTreeも一緒に閉じる。
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" カーソル移動
+Plugin 'easymotion/vim-easymotion'
+" ホームポジションに近いキーを使う
+let g:EasyMotion_keys='hjklasdfgyuiopqwertnmzxcvbHJKLASDFGYUIOPQWERTNMZXCVB'
+" 「'」 + 何かにマッピング
+let g:EasyMotion_leader_key="'"
+" 1 ストローク選択を優先する
+let g:EasyMotion_grouping=1
 
 " インターフェイス変更
 Plugin 'vim-airline/vim-airline'
@@ -420,18 +428,18 @@ if has('mouse')
     endif
 endif
 " clang-format必須 C++整形
-function! CPPCodeCleanup()
-  " echo "Cleanup cpp code"
-  let l:lines="all"
-  let g:clang_format_fallback_style = 'Google'
-  :pyf /usr/local/share/clang/clang-format.py
-endfunction
-command! CPPCodeCleanup call CPPCodeCleanup()
-
-autocmd BufWrite *.{cpp} :CPPCodeCleanup
-autocmd BufWrite *.{hpp} :CPPCodeCleanup
-autocmd BufWrite *.{c} :CPPCodeCleanup
-autocmd BufWrite *.{h} :CPPCodeCleanup
+" function! CPPCodeCleanup()
+"   " echo "Cleanup cpp code"
+"   let l:lines="all"
+"   let g:clang_format_fallback_style = 'Google'
+"   :pyf /usr/local/share/clang/clang-format.py
+" endfunction
+" command! CPPCodeCleanup call CPPCodeCleanup()
+"
+" autocmd BufWrite *.{cpp} :CPPCodeCleanup
+" autocmd BufWrite *.{hpp} :CPPCodeCleanup
+" autocmd BufWrite *.{c} :CPPCodeCleanup
+" autocmd BufWrite *.{h} :CPPCodeCleanup
 
 " vim内のタブ操作
 " map <Space> :bp<CR>
