@@ -188,6 +188,8 @@ let g:vim_markdown_conceal = 0
 
 " Plugin 'gabrielelana/vim-markdown'
 Plugin 'kannokanno/previm'
+let g:vim_markdown_folding_disabled=1
+nnoremap <silent> <C-p> :PrevimOpen<CR> 
 au BufRead,BufNewFile *.md set filetype=markdown
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
@@ -448,6 +450,7 @@ map <S-Space> :bn<CR>
 "filetype plugin indent on
 "
 " 入力モードでのカーソル移動
+inoremap <C-d> <BS>
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-h> <Left>
