@@ -25,12 +25,12 @@ Plugin 'honza/vim-snippets'
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsJumpForwardTrigger="<c-l>"
+let g:UltiSnipsJumpBackwardTrigger="<c-h>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
-set runtimepath+=~/dotfiles/ultisnip/vim_snippets_ros
+set runtimepath+=~/dotfiles/snipets
 " ----For Python editor----
 " add indent line
 Plugin 'Yggdroot/indentLine'
@@ -466,9 +466,9 @@ map <S-Space> :bn<CR>
 " 入力モードでのカーソル移動
 inoremap <C-d> <BS>
 inoremap <C-j> <Down>
-" inoremap <C-k> <Up>
-inoremap <C-h> <Left>
-inoremap <C-l> <Right>
+inoremap <C-k> <Up>
+" inoremap <C-h> <Left>
+" inoremap <C-l> <Right>
 inoremap っｊ <Esc>
 
 " 日本語入力時にEscを押すと勝手にIMEがOFFになる
