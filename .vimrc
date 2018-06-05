@@ -14,8 +14,6 @@ Plugin 'VundleVim/Vundle.vim'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
 
 " Track the engine.
 Plugin 'SirVer/ultisnips'
@@ -25,12 +23,13 @@ Plugin 'honza/vim-snippets'
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-l>"
-let g:UltiSnipsJumpBackwardTrigger="<c-h>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
+let g:UltiSnipsSnippetDirectories =["snipet","UltiSnips"]
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
-set runtimepath+=~/dotfiles/snipets
+set runtimepath+=~/dotfiles/snipets/
 " ----For Python editor----
 " add indent line
 Plugin 'Yggdroot/indentLine'
@@ -85,6 +84,15 @@ set splitright
 
 " ファイル検索
 Plugin 'ctrlpvim/ctrlp.vim'
+" キャッシュを利用して高速検索
+let g:ctrlp_use_caching = 1
+" vim終了時にキャッシュをクリアしない
+let g:ctrlp_clear_cache_on_exit = 0
+" # <C-r>でキャッシュをクリアして再検索
+let g:ctrlp_prompt_mappings = { 'PrtClearCache()': ['<C-r>'] }
+" # 検索の際に200[ms]のウェイトを入れる（１文字入力の度に検索結果がコロコロ変わるのが気に入らないため）
+let g:ctrlp_lazy_update = 200
+
 " 検索モードを開く
 nmap <Leader>f :CtrlP<CR>
 
@@ -193,6 +201,12 @@ let g:ros_catkin_make_options = ''
 "   - :A 現在編集してるC++のコードに対応するソースコードorヘッダファイル を自動検索
 "   - :roscd
 "   - :rosed
+
+" Plugin for git 
+Plugin 'tpope/vim-fugitive'
+" Statuslineの設定
+set laststatus=2
+set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ \[ENC=%{&fileencoding}]%P
 
 " For Markdown
 Plugin 'godlygeek/tabular'
@@ -458,8 +472,8 @@ endif
 " autocmd BufWrite *.{h} :CPPCodeCleanup
 
 " vim内のタブ操作
-" map <Space> :bp<CR>
-map <S-Space> :bn<CR>
+nnoremap <Leader>b :bp<CR>
+nnoremap <Leader>n :bn<CR>
 
 "filetype plugin indent on
 "
