@@ -84,6 +84,7 @@ set splitright
 
 " ファイル検索
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'rking/ag.vim'
 " キャッシュを利用して高速検索
 let g:ctrlp_use_caching = 1
 " vim終了時にキャッシュをクリアしない
@@ -92,6 +93,13 @@ let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_prompt_mappings = { 'PrtClearCache()': ['<C-r>'] }
 " # 検索の際に200[ms]のウェイトを入れる（１文字入力の度に検索結果がコロコロ変わるのが気に入らないため）
 let g:ctrlp_lazy_update = 200
+" キャッシュを保持するとgit checkout時にファイル差分があるのでキャッシュクリア
+" キャッシュを保持しなくてもagがあれば早い
+if executable('ag')
+		" sudo apt install silversearcher-ag
+  let g:ctrlp_use_caching=0
+  let g:ctrlp_user_command='ag %s -i --nocolor --nogroup -g ""'
+endif
 
 " 検索モードを開く
 nmap <Leader>f :CtrlP<CR>
@@ -204,6 +212,8 @@ let g:ros_catkin_make_options = ''
 
 " Plugin for git 
 Plugin 'tpope/vim-fugitive'
+" :Gdiff opened as vertical
+set diffopt+=vertical
 " Statuslineの設定
 set laststatus=2
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ \[ENC=%{&fileencoding}]%P
