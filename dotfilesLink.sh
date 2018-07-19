@@ -8,3 +8,4 @@ ln -sf ~/dotfiles/.vimrc ~/.vimrc
 ln -sf ~/dotfiles/.screenrc ~/.screenrc
 ln -sf ~/dotfiles/ftdetect ~/.vim
 ln -sf ~/dotfiles/bundle ~/.vim
+ln -sf ~/dotfiles/snipets ~/.vim
