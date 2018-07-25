@@ -2,6 +2,7 @@
 vim setting file for ROS(Robot OS)  
 
 ## Installation
+### for vim
 `$ cd`  
 `$ git clone --recursive https://github.com/h-wata/dotfiles.git`  
 `$ sh dotfilesLink.sh`  
@@ -12,6 +13,8 @@ Download DoxygenToolkit.vim from [Web](http://www.vim.org/scripts/script.php?scr
 
 `$ vim`  
 @vim `:PluginInstall`  
+### for github
+`$ ./gitconfiglink.sh`
 
 ## Plugin List
 -'Yggdroot/indentLine'  
