@@ -75,6 +75,10 @@ except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException)
     rospy.logerr('An error occured while looking up tansform: {}'.format(e))
 endsnippet
 
+snippet rospy.callback
+        def ${1: callback}(self, r):
+endsnippet
+
 snippet rospy.Publisher
 rospy.Publisher(${1:topic_name}, ${2:type}, queue_size=${3:1})
 endsnippet
@@ -132,6 +136,24 @@ class `!p snip.rv = to_camel_case_first_title(os.path.splitext(fn)[0])`(EventSta
         Code inside this function is evaluated once at entry
         '''
         pass
+endsnippet
+
+snippet ros_node
+import rospy
+
+
+class ${1:ClassName}(object):
+    """${2:Add node description here}"""
+
+    def __init__(self):
+        rospy.init_node('${3:NodeName}')
+				self._init_pubsub()
+
+	  def _init_pubsub(self):
+
+if __name__ == '__main__':
+    node = $1()
+    rospy.spin()
 endsnippet
 
 #snippet flexbe_service_state
