@@ -291,7 +291,7 @@ endif
 set nocompatible
 
 "タブ幅の設定
-set tabstop=4
+set tabstop=2
 
 "行番号表示
 set number
