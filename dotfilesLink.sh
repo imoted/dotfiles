@@ -1,5 +1,5 @@
 #!/bin/sh
-sudo apt-get -y install vim-nox-py2
+sudo apt-get -y install vim-gnome-py2
 sudo apt-get -y install flake8
 sudo apt-get -y install clang-format-3.6
 sudo apt-get -y install python-jedi
