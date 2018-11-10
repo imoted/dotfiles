@@ -1,4 +1,8 @@
+set fileformats=unix,dos,mac
+set fileencodings=utf-8,sjis
+
 set nocompatible              " be iMproved, required
+set wildmenu " コマンドモードの補完
 filetype off                  " required
 
 "Leader キーをspaceに
@@ -20,13 +24,35 @@ Plugin 'SirVer/ultisnips'
 
 " Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
+" https://github.com/SirVer/ultisnips/issues/519
+let g:UltiSnipsExpandTrigger="<c-tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsSnippetsDir='~/.vim/snipets'
+let g:ulti_expand_or_jump_res = 0
+function! CleverTab()"{{{
+    call UltiSnips#ExpandSnippetOrJump()
+    if g:ulti_expand_or_jump_res
+        return ""
+    else
+        if pumvisible()
+            return "\<c-n>"
+        else
+            return neocomplete_start_manual_complete()
+        endif
+    endif
+endfunction"}}}
+
+inoremap <silent> <tab> <c-r>=CleverTab()<cr>
+" inoremap <silent> <tab> <c-r>=g:UltiSnips_Complete()<cr>
+snoremap <silent> <tab> <esc>:call UltiSnips#ExpandSnippetOrJump()<cr>
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<TAB>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
+" let g:UltiSnipsExpandTrigger="<TAB>"
+" let g:UltiSnipsJumpForwardTrigger="<tab>"
+" let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
 let g:UltiSnipsSnippetDirectories =["snipet","UltiSnips"]
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<C-R>=UltiSnips#ExpandSnippet()"
+" inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<C-R>=UltiSnips#ExpandSnippet()"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 set runtimepath+=~/.vim/snipets/
@@ -172,6 +198,15 @@ let g:neocomplete#force_omni_input_patterns.c =
       \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
 let g:neocomplete#force_omni_input_patterns.cpp =
       \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+let g:neocomplete#enable_smart_case = 1
+" 3文字以上の単語に対して補完を有効にする
+let g:neocomplete#min_keyword_length = 3
+" 区切り文字まで補完する
+let g:neocomplete#enable_auto_delimiter = 1
+" 1文字目の入力から補完のポップアップを表示
+let g:neocomplete#auto_completion_start_length = 1
+" バックスペースで補完のポップアップを閉じる
+inoremap <expr><BS> neocomplete#smart_close_popup()."<C-h>"
 
 " }}}
 "
