@@ -25,8 +25,8 @@ Plugin 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
 " https://github.com/SirVer/ultisnips/issues/519
-let g:UltiSnipsExpandTrigger="<c-tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-tab>"
+let g:UltiSnipsExpandTrigger="<c-t>"
+let g:UltiSnipsJumpForwardTrigger="<c-t>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsSnippetsDir='~/.vim/snipets'
 let g:ulti_expand_or_jump_res = 0
@@ -38,14 +38,14 @@ function! CleverTab()"{{{
         if pumvisible()
             return "\<c-n>"
         else
-            return neocomplete_start_manual_complete()
+            return neocomplete#start_manual_complete()
         endif
     endif
 endfunction"}}}
 
 inoremap <silent> <tab> <c-r>=CleverTab()<cr>
 " inoremap <silent> <tab> <c-r>=g:UltiSnips_Complete()<cr>
-snoremap <silent> <tab> <esc>:call UltiSnips#ExpandSnippetOrJump()<cr>
+" snoremap <silent> <tab> <esc>:call UltiSnips#ExpandSnippetOrJump()<cr>
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 " let g:UltiSnipsExpandTrigger="<TAB>"
@@ -257,7 +257,45 @@ let g:clang_cpp_options = '-std=c++11 -stdlib=libc++'
 
 " }}}
 " <<<neocomplete and vim-clang setting
+" ctags setting>>>
+" ファイルタイプ毎 & gitリポジトリ毎にtagsの読み込みpathを変える
+function! ReadTags(type)
+    try
+        execute "set tags=".$HOME."/work/dotfiles/tags_files/".
+              \ system("cd " . expand('%:p:h') . "; basename `git rev-parse --show-toplevel` | tr -d '\n'").
+              \ "/" . a:type . "_tags"
+    catch
+        execute "set tags=./tags/" . a:type . "_tags;"
+    endtry
+endfunction
 
+augroup TagsAutoCmd
+    autocmd!
+    autocmd BufEnter * :call ReadTags(&filetype)
+augroup END
+set notagbsearch
+
+" [tag jump] カーソルの単語の定義先にジャンプ（複数候補はリスト表示）
+nnoremap tj :exe("tjump ".expand('<cword>'))<CR>
+
+" [tag back] tag stack を戻る -> tp(tag pop)よりもtbの方がしっくりきた
+nnoremap tb :pop<CR>
+
+" [tag next] tag stack を進む
+nnoremap tn :tag<CR>
+
+" [tag vertical] 縦にウィンドウを分割してジャンプ
+nnoremap tv :vsp<CR> :exe("tjump ".expand('<cword>'))<CR>
+
+" [tag horizon] 横にウィンドウを分割してジャンプ
+nnoremap th :split<CR> :exe("tjump ".expand('<cword>'))<CR>
+
+" [tag tab] 新しいタブでジャンプ
+nnoremap tt :tab sp<CR> :exe("tjump ".expand('<cword>'))<CR>
+
+" [tags list] tag list を表示
+nnoremap tl :ts<CR>
+" <<< ctags setting
 " over-vim 置換時の見やすさ改善
 Plugin 'osyo-manga/vim-over'
 " 全体置換
@@ -294,7 +332,7 @@ let g:vim_markdown_conceal = 0
 " Plugin 'gabrielelana/vim-markdown'
 Plugin 'kannokanno/previm'
 let g:vim_markdown_folding_disabled=1
-nnoremap <silent> <C-p> :PrevimOpen<CR> 
+" nnoremap <silent> <C-v> :PrevimOpen<CR> 
 au BufRead,BufNewFile *.md set filetype=markdown
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
