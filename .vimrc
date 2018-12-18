@@ -1,5 +1,6 @@
+set encoding=utf-8
 set fileformats=unix,dos,mac
-set fileencodings=utf-8,sjis
+set fileencodings=utf-8,sjis,euc-jp,iso-2022-jp
 
 set nocompatible              " be iMproved, required
 set wildmenu " コマンドモードの補完
@@ -21,6 +22,9 @@ Plugin 'VundleVim/Vundle.vim'
 
 " Track the engine.
 Plugin 'SirVer/ultisnips'
+
+" vim-surround
+Plugin 'tpope/vim-surround'
 
 " Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
@@ -62,12 +66,14 @@ Plugin 'Yggdroot/indentLine'
 " flake8 構文チェック<F7>割当 apt-get install flake8
 Plugin 'nvie/vim-flake8'
 " Python補完 apt-get install python-jedi
-Plugin 'davidhalter/jedi-vim'
+" Plugin 'davidhalter/jedi-vim'
 " pythonのrename用のマッピングがquickrunとかぶるため回避させる
-let g:jedi#rename_command = ""
-let g:jedi#documentation_command= "z"
+" let g:jedi#rename_command = ""
+" let g:jedi#documentation_command= "z"
 autocmd FileType python setlocal completeopt-=preview " ポップアップを表示しない
 " autopep 
+let g:autopep8_diff_type='vertical'
+let g:autopep8_disable_show_diff=1
 " original http://stackoverflow.com/questions/12374200/using-uncrustify-with-vim/15513829#15513829
 function! Preserve(command)
     " Save the last search.
@@ -98,7 +104,7 @@ endfunction
 nnoremap <S-f> :call Autopep8()<CR>
 
 " 自動保存
-autocmd BufWrite *.{py} :call Autopep8()
+" autocmd BufWrite *.{py} :call Autopep8()
 
 " Tree構造を表示するC-e で表示 :help NERDtree参照
 Plugin 'scrooloose/nerdtree'
@@ -260,12 +266,18 @@ let g:clang_cpp_options = '-std=c++11 -stdlib=libc++'
 " ctags setting>>>
 " ファイルタイプ毎 & gitリポジトリ毎にtagsの読み込みpathを変える
 function! ReadTags(type)
+   if a:type == 'cpp'
+      let type = 'c++'
+	 else
+		  let type = a:type
+   endif
+
     try
         execute "set tags=".$HOME."/work/dotfiles/tags_files/".
               \ system("cd " . expand('%:p:h') . "; basename `git rev-parse --show-toplevel` | tr -d '\n'").
-              \ "/" . a:type . "_tags"
+              \ "/" . type . "_tags"
     catch
-        execute "set tags=./tags/" . a:type . "_tags;"
+        execute "set tags=./tags/" . type . "_tags;"
     endtry
 endfunction
 
@@ -332,6 +344,7 @@ let g:vim_markdown_conceal = 0
 " Plugin 'gabrielelana/vim-markdown'
 Plugin 'kannokanno/previm'
 let g:vim_markdown_folding_disabled=1
+let g:previm_open_cmd = 'open -a google-chrome'
 " nnoremap <silent> <C-v> :PrevimOpen<CR> 
 au BufRead,BufNewFile *.md set filetype=markdown
 " plugin from http://vim-scripts.org/vim/scripts.html

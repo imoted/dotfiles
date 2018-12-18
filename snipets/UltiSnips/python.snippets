@@ -75,24 +75,28 @@ except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException)
     rospy.logerr('An error occured while looking up tansform: {}'.format(e))
 endsnippet
 
-snippet rospy.callback
+snippet rospy-callback
         def ${1: callback}(self, r):
 endsnippet
 
-snippet rospy.Publisher
+snippet rospy-Publisher
 rospy.Publisher(${1:topic_name}, ${2:type}, queue_size=${3:1})
 endsnippet
 
-snippet rospy.Subscriber
+snippet rospy-Subscriber
 rospy.Subscriber(${1:topic_name}, ${2:type}, ${3: callback}, queue_size=${4:1})
 endsnippet
 
-snippet rospy.Service
+snippet rospy-Service
 rospy.Service(${1:topic_name}, ${2:type}, ${3: callback})
 endsnippet
 
-snippet rospy.ServiceProxy
+snippet rospy-ServiceProxy
 rospy.ServiceProxy(${1:topic_name}, ${2:type})
+endsnippet
+
+snippet set-pdb
+import pdb; pdb.set_trace()
 endsnippet
 
 snippet flexbe_state
