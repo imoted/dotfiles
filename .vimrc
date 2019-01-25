@@ -281,6 +281,14 @@ function! ReadTags(type)
     endtry
 endfunction
 
+augroup MackTagsAutoCmd
+    autocmd!
+    autocmd BufWrite *.py !make -f /home/gisen/work/dotfiles/ctags/Makefile
+    autocmd BufWrite *.cpp !make -f /home/gisen/work/dotfiles/ctags/Makefile
+    autocmd BufWrite *.php !make -f /home/gisen/work/dotfiles/ctags/Makefile
+    autocmd BufWrite *.rb !make -f /home/gisen/work/dotfiles/ctags/Makefile
+augroup END
+
 augroup TagsAutoCmd
     autocmd!
     autocmd BufEnter * :call ReadTags(&filetype)
@@ -409,7 +417,7 @@ endif
 set nocompatible
 
 "タブ幅の設定
-set tabstop=2
+set tabstop=4
 
 "行番号表示
 set number
