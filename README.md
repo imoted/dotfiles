@@ -7,6 +7,8 @@ vim setting file for ROS(Robot OS)
 `$ git clone --recursive https://github.com/h-wata/dotfiles.git`  
 `$ sh dotfilesLink.sh`  
 
+`git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
+
 Download DoxygenToolkit.vim from [Web](http://www.vim.org/scripts/script.php?script_id=987)   
 `$ mkdir ~/.vim/plugin`  
 `$ mv ~/file/path/to/DoxygenToolkit.vim ~/.vim/plugin/`  
