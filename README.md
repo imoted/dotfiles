@@ -20,6 +20,29 @@ sudo apt install vim-gnome-py2にて、python2が有効化されたvimをイン�
 sudo update-alternatives --config vim
 にて、vimの参照先を入れ替える。
 
+### for raspberrypi
+
+1. インストールされている Vim の確認
+```
+dpkg -l | grep vim
+```
+で、インストールされている Vim を確認する。
+確認結果、 Vim-tiny がインストールされていた。
+Vim-tiny では 有効にならないオプションがある (下線 等) とのこと。
+ 
+2.  Vim-tiny のアンインストール
+```
+  sudo apt-get --purge remove vim-common vim-tiny
+```
+で、Vim-tiny をアンインストール
+
+3. 通常のvim をインストール
+```
+sudo apt-get install vim
+```
+で、通常版の Vim をインストール
+
+
 ### for github
 `$ ./gitconfiglink.sh`
 
