@@ -14,10 +14,16 @@ Download DoxygenToolkit.vim from [Web](http://www.vim.org/scripts/script.php?scr
 `$ vim`  
 @vim `:PluginInstall`  
 
+vi では、だめなので、vimをapt installすること
+
 Disabling ros.vim: Vim with +python is requiredと出る。(ros.vimはpython2が必須)
+
 sudo apt install vim-gnome-py2にて、python2が有効化されたvimをインストールする。
+
 そして
+
 sudo update-alternatives --config vim
+
 にて、vimの参照先を入れ替える。
 
 ### for raspberrypi
